@@ -37,6 +37,7 @@
 		defaults: {
 			navItems: 'a',
 			currentClass: 'current',
+			offset: 0,
 			changeHash: false,
 			easing: 'swing',
 			filter: '',
@@ -199,7 +200,11 @@
 		},
 
 		scrollTo: function(target, callback) {
-			var offset = $(target).offset().top;
+			var offset = $(target).offset().top - this.config.offset;
+
+			if (offset < 0) {
+			  offset = 0;
+			}
 
 			$('html, body').animate({
 				scrollTop: offset
